@@ -44,7 +44,10 @@ export const serverDetails = async (req, res) => {
       /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
       ""
     );
-    if (!stderr) {
+    if (
+      !stderr ||
+      stderr == "jq: error (at <stdin>:0): Cannot iterate over null (null)\n"
+    ) {
       return res.status(200).json({
         status: "success",
         message: result,
