@@ -27,3 +27,29 @@ export const stopServer = async (req, res) => {
     });
   }
 };
+export const serverDetails = async (req, res) => {
+  try {
+    const { stdout, stderr } = await exec("bash scripts/server_details.sh");
+    return res.status(200).json({
+      status: "success",
+      message: stdout,
+    });
+  } catch (err) {
+    return res.status(400).json({
+      error: err,
+    });
+  }
+};
+export const serverMonitor = async (req, res) => {
+  try {
+    const { stdout, stderr } = await exec("bash scripts/server_monitor.sh");
+    return res.status(200).json({
+      status: "success",
+      message: stdout,
+    });
+  } catch (err) {
+    return res.status(400).json({
+      error: err,
+    });
+  }
+};
