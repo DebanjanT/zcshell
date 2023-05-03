@@ -14,6 +14,7 @@ export const startServer = async (req, res) => {
     });
   } catch (err) {
     if (
+      err.stderr == "" ||
       err.stderr ==
         "jq: error (at <stdin>:0): Cannot iterate over null (null)\n" ||
       err.stderr == "jq: error (at <stdin>:0): Cannot iterate over null (null)"
@@ -46,6 +47,7 @@ export const stopServer = async (req, res) => {
     });
   } catch (err) {
     if (
+      err.stderr == "" ||
       err.stderr ==
         "jq: error (at <stdin>:0): Cannot iterate over null (null)\n" ||
       err.stderr == "jq: error (at <stdin>:0): Cannot iterate over null (null)"
@@ -80,6 +82,7 @@ export const serverDetails = async (req, res) => {
     }
   } catch (err) {
     if (
+      err.stderr == "" ||
       err.stderr ==
         "jq: error (at <stdin>:0): Cannot iterate over null (null)\n" ||
       err.stderr == "jq: error (at <stdin>:0): Cannot iterate over null (null)"
@@ -114,6 +117,7 @@ export const serverMonitor = async (req, res) => {
     }
   } catch (err) {
     if (
+      err.stderr == "" ||
       err.stderr ==
         "jq: error (at <stdin>:0): Cannot iterate over null (null)\n" ||
       err.stderr == "jq: error (at <stdin>:0): Cannot iterate over null (null)"
