@@ -1,16 +1,15 @@
+import { ansiConverter } from "../utils/ansiConverter";
+
 const util = require("util");
 const exec = util.promisify(require("child_process").exec);
 
 export const startServer = async (req, res) => {
   try {
     const { stdout, stderr } = await exec("bash scripts/start_server.sh");
-    const result = stdout.replace(
-      /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
-      ""
-    );
+
     return res.status(200).json({
       status: "success",
-      message: result,
+      message: ansiConverter(stdout),
     });
   } catch (err) {
     if (
@@ -19,17 +18,13 @@ export const startServer = async (req, res) => {
         "jq: error (at <stdin>:0): Cannot iterate over null (null)\n" ||
       err.stderr == "jq: error (at <stdin>:0): Cannot iterate over null (null)"
     ) {
-      const temp_result = err.stdout.replace(
-        /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
-        ""
-      );
       return res.status(200).json({
         status: "partial success",
-        message: temp_result,
+        message: ansiConverter(err.stdout),
       });
     }
     return res.status(400).json({
-      error: err,
+      error: ansiConverter(err.stderr),
     });
   }
 };
@@ -37,13 +32,10 @@ export const startServer = async (req, res) => {
 export const stopServer = async (req, res) => {
   try {
     const { stdout, stderr } = await exec("bash scripts/stop_server.sh");
-    const result = stdout.replace(
-      /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
-      ""
-    );
+
     return res.status(200).json({
       status: "success",
-      message: result,
+      message: ansiConverter(stdout),
     });
   } catch (err) {
     if (
@@ -52,13 +44,9 @@ export const stopServer = async (req, res) => {
         "jq: error (at <stdin>:0): Cannot iterate over null (null)\n" ||
       err.stderr == "jq: error (at <stdin>:0): Cannot iterate over null (null)"
     ) {
-      const temp_result = err.stdout.replace(
-        /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
-        ""
-      );
       return res.status(200).json({
         status: "partial success",
-        message: temp_result,
+        message: ansiConverter(err.stdout),
       });
     }
     return res.status(400).json({
@@ -70,14 +58,11 @@ export const stopServer = async (req, res) => {
 export const serverDetails = async (req, res) => {
   try {
     const { stdout, stderr } = await exec("bash scripts/server_details.sh");
-    const result = stdout.replace(
-      /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
-      ""
-    );
+
     if (!stderr) {
       return res.status(200).json({
         status: "success",
-        message: result,
+        message: ansiConverter(stdout),
       });
     }
   } catch (err) {
@@ -87,13 +72,9 @@ export const serverDetails = async (req, res) => {
         "jq: error (at <stdin>:0): Cannot iterate over null (null)\n" ||
       err.stderr == "jq: error (at <stdin>:0): Cannot iterate over null (null)"
     ) {
-      const temp_result = err.stdout.replace(
-        /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
-        ""
-      );
       return res.status(200).json({
         status: "partial success",
-        message: temp_result,
+        message: ansiConverter(err.stdout),
       });
     }
     return res.status(400).json({
@@ -105,14 +86,11 @@ export const serverDetails = async (req, res) => {
 export const serverMonitor = async (req, res) => {
   try {
     const { stdout, stderr } = await exec("bash scripts/server_monitor.sh");
-    const result = stdout.replace(
-      /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
-      ""
-    );
+
     if (!stderr) {
       return res.status(200).json({
         status: "success",
-        message: result,
+        message: ansiConverter(stdout),
       });
     }
   } catch (err) {
@@ -122,13 +100,9 @@ export const serverMonitor = async (req, res) => {
         "jq: error (at <stdin>:0): Cannot iterate over null (null)\n" ||
       err.stderr == "jq: error (at <stdin>:0): Cannot iterate over null (null)"
     ) {
-      const temp_result = err.stdout.replace(
-        /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
-        ""
-      );
       return res.status(200).json({
         status: "partial success",
-        message: temp_result,
+        message: ansiConverter(err.stdout),
       });
     }
     return res.status(400).json({
