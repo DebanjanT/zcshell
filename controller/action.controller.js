@@ -46,7 +46,8 @@ export const serverDetails = async (req, res) => {
     );
     if (
       !stderr ||
-      stderr == "jq: error (at <stdin>:0): Cannot iterate over null (null)\n"
+      stderr == "jq: error (at <stdin>:0): Cannot iterate over null (null)\n" ||
+      stderr == "jq: error (at <stdin>:0): Cannot iterate over null (null)"
     ) {
       return res.status(200).json({
         status: "success",
