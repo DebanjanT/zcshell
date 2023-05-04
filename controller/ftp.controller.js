@@ -76,13 +76,13 @@ export const readFolder = async (req, res) => {
           fileList.push({
             name: file.name,
             type: "folder",
-            dir: path.join(FOLDER_PATH, file.name),
+            dir: path.join(FOLDER_PATH + file.name),
           });
         } else {
           fileList.push({
             name: file.name,
             type: "file",
-            dir: path.join(FOLDER_PATH, file.name),
+            dir: path.join(FOLDER_PATH + file.name),
           });
         }
       });
