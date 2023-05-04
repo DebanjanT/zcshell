@@ -9,7 +9,7 @@ export const fetchFiles = async (req, res) => {
     const HOME_DIR = process.env.HOME;
 
     const content = fs
-      .readdirSync(USER_SERVER_DIR, {
+      .readdirSync(HOME_DIR, {
         withFileTypes: true,
         recursive: true,
       })
@@ -30,6 +30,7 @@ export const fetchFiles = async (req, res) => {
       });
 
     return res.status(200).json({
+      initialDir: HOME_DIR,
       fileList: fileList,
     });
   } catch (err) {
