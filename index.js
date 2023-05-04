@@ -11,7 +11,12 @@ const app = express();
 // ** express middleware (execute before sending response to client)
 // use limit to express to allow user image upload upto 5mb , this is required to avoid "payload too large error" while api hit
 app.use(express.json({ limit: "5mb" }));
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  })
+);
 //morgan for debug requestsß
 app.use(morgan("dev"));
 const folder = path.basename(process.cwd());
