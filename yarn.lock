@@ -91,6 +91,11 @@ call-bind@^1.0.0:
     function-bind "^1.1.1"
     get-intrinsic "^1.0.2"
 
+cfg-reader@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/cfg-reader/-/cfg-reader-3.0.3.tgz#61d01bfee75cea57cfc695c7da84bf4e5c4e517e"
+  integrity sha512-XbnzWJlB54nyYQVrPUOVFY9DEEReykYW4hH2yg+91D+QAKfvq3sAaf5Snhiq65oXzKI1l9P2HAseMkeTumhPvQ==
+
 chokidar@^3.5.2:
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.3.tgz#1cf37c8707b932bd1af1ae22c0432e2acd1903bd"

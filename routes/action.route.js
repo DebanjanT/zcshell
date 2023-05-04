@@ -5,7 +5,7 @@ import {
   startServer,
   stopServer,
 } from "../controller/action.controller";
-import { readConfig } from "../controller/config.controller";
+import { readConfig, writeConfigTest } from "../controller/config.controller";
 
 const router = express.Router();
 
@@ -16,5 +16,6 @@ router.get("/server/monitor", serverMonitor);
 
 //Config reader routes
 router.get("/config/read", readConfig);
+router.post("/config/write", writeConfigTest);
 
 module.exports = router;
