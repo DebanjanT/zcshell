@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.get("/ftp/fetchfiles", fetchFiles);
 router.post("/ftp/readfile", readFile);
-router.get("/ftp/readfolder", readFolder);
+router.post("/ftp/readfolder", readFolder);
 
 module.exports = router;
