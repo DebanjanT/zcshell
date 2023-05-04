@@ -61,6 +61,22 @@ export const readFile = async (req, res) => {
     });
   }
 };
+export const writeFile = async (req, res) => {
+  try {
+    const { FILE_NAME, FILE_PATH, FILE_DATA } = req.body;
+    fs.writeFileSync(FILE_PATH, FILE_DATA);
+    return res.status(200).json({
+      status: "success",
+      message: `${FILE_NAME} updated successfully`,
+    });
+  } catch (err) {
+    return res.status(400).json({
+      status: "error",
+      message: `Could not write ${FILE_NAME} file`,
+      error: err,
+    });
+  }
+};
 
 export const readFolder = async (req, res) => {
   try {
