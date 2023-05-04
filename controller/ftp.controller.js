@@ -6,6 +6,7 @@ export const fetchFiles = async (req, res) => {
   try {
     console.log(process.cwd());
     let fileList = new Array();
+    const HOME_DIR = process.env.HOME;
 
     const content = fs
       .readdirSync(USER_SERVER_DIR, {
@@ -17,11 +18,13 @@ export const fetchFiles = async (req, res) => {
           fileList.push({
             name: file.name,
             type: "folder",
+            dir: path.join(HOME_DIR, file.name),
           });
         } else {
           fileList.push({
             name: file.name,
             type: "file",
+            dir: path.join(HOME_DIR, file.name),
           });
         }
       });
