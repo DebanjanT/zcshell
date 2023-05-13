@@ -4,6 +4,7 @@ require("dotenv").config();
 import path from "path";
 const morgan = require("morgan");
 import { readdirSync } from "fs";
+import { SERVER_FILE, USER_SERVER_DIR } from "./constants/locations.var";
 
 // ** create express app
 const app = express();
@@ -19,7 +20,6 @@ app.use(
 );
 //morgan for debug requestsß
 app.use(morgan("dev"));
-const folder = path.basename(process.cwd());
 
 const port = process.env.PORT || 8000;
 
@@ -30,5 +30,5 @@ readdirSync("./routes").map((r) =>
 );
 
 app.listen(port, () => {
-  console.log(`[zcshell] Express serving on port ${port}`);
+  console.log(`[ZCSHELL] Express serving on port ${port}`);
 });

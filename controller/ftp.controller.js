@@ -1,5 +1,4 @@
 import path from "path";
-import { USER_SERVER_DIR } from "../constants/locations.var";
 const fs = require("fs");
 
 export const fetchFiles = async (req, res) => {
