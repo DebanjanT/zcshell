@@ -4,10 +4,12 @@ const sqlite3 = require("sqlite3").verbose();
 export const readRankMeDatabase = async (req, res) => {
   try {
     const RANKME_DB_PATH = `${USER_SERVER_DIR}serverfiles/csgo/addons/sourcemod/data/sqlite/rankme.sq3`;
+    console.log("RANKME_DB_PATH=>", RANKME_DB_PATH);
 
     const db = new sqlite3.Database(RANKME_DB_PATH);
 
     db.on("error", (err) => {
+      console.log(err);
       return res.status(400).json({
         error: err,
       });
