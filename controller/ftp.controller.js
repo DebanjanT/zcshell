@@ -14,17 +14,25 @@ export const fetchFiles = async (req, res) => {
       })
       .forEach((file) => {
         if (file.isDirectory()) {
-          fileList.push({
-            name: file.name,
-            type: "folder",
-            dir: path.join(HOME_DIR, file.name),
-          });
+          if (file.name.startsWith(".")) {
+            console.log("Skipping hidden file: " + file.name);
+          } else {
+            fileList.push({
+              name: file.name,
+              type: "folder",
+              dir: path.join(HOME_DIR, file.name),
+            });
+          }
         } else {
-          fileList.push({
-            name: file.name,
-            type: "file",
-            dir: path.join(HOME_DIR, file.name),
-          });
+          if (file.name.startsWith(".")) {
+            console.log("Skipping hidden file: " + file.name);
+          } else {
+            fileList.push({
+              name: file.name,
+              type: "file",
+              dir: path.join(HOME_DIR, file.name),
+            });
+          }
         }
       });
 
