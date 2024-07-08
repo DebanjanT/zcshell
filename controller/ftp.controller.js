@@ -10,7 +10,7 @@ export const fetchFiles = async (req, res) => {
     const content = fs
       .readdirSync(HOME_DIR, {
         withFileTypes: true,
-        recursive: true,
+        recursive: false,
       })
       .forEach((file) => {
         if (file.isDirectory()) {
