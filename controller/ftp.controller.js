@@ -54,6 +54,10 @@ export const readFile = async (req, res) => {
     try {
         const { FILE_PATH } = req.body;
         // const FILE_DIR = path.join(USER_SERVER_DIR, FILE_PATH);
+        if (FILE_PATH.endsWith(".vpk") )return re.status(400).json({
+            status: "error",
+            message: "Cannot read Valve Package Files",
+        });
         const data = fs.readFileSync(FILE_PATH, { encoding: "utf8", flag: "r" });
         return res.status(200).json({
             status: "success",
